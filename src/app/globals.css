@@ -1,0 +1,878 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 120 100% 50%;
+    --card: 0 0% 5%;
+    --card-foreground: 120 100% 50%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 120 100% 50%;
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 120 60% 30%;
+    --secondary-foreground: 120 100% 50%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 120 60% 40%;
+    --accent: 120 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 60% 30%;
+    --input: 120 60% 30%;
+    --ring: 120 100% 50%;
+    --chart-1: 120 100% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 100 80% 50%;
+    --chart-4: 140 70% 40%;
+    --chart-5: 180 50% 35%;
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist-mono), monospace;
+  }
+}
+
+/* 1980s Retro Terminal Styles */
+.retro-background {
+  background: radial-gradient(ellipse at center, #001100 0%, #000000 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.retro-text {
+  color: #00ff00;
+  font-family: var(--font-geist-mono), 'Courier New', monospace;
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff0080;
+  letter-spacing: 0.05em;
+}
+
+.retro-text-highlight {
+  color: #00ff00;
+  font-family: var(--font-geist-mono), 'Courier New', monospace;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.glow-text {
+  color: #00ff00;
+  text-shadow: 
+    0 0 5px #00ff00,
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 40px #00ff00,
+    0 0 80px #00ff00;
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px #00ff00,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00,
+      0 0 40px #00ff00,
+      0 0 80px #00ff00;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px #00ff00,
+      0 0 5px #00ff00,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00,
+      0 0 40px #00ff00;
+  }
+}
+
+.blink {
+  animation: blink-animation 1.5s infinite;
+}
+
+@keyframes blink-animation {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0.3;
+  }
+}
+
+.retro-panel {
+  background: rgba(0, 20, 0, 0.8);
+  border: 2px solid #00ff00;
+  box-shadow: 
+    0 0 10px #00ff0040,
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+  position: relative;
+}
+
+.retro-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 0, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 255, 0, 0.03) 3px
+    );
+  pointer-events: none;
+}
+
+.retro-button {
+  background: #001100;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  font-family: var(--font-geist-mono), monospace;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  padding: 12px 24px;
+  text-shadow: 0 0 5px #00ff00;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ff0040;
+}
+
+.retro-button:hover:not(:disabled) {
+  background: #00ff00;
+  color: #000000;
+  text-shadow: none;
+  transform: translateY(-2px);
+}
+
+.retro-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.retro-input {
+  background: #000000;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  font-family: var(--font-geist-mono), monospace;
+  padding: 8px 12px;
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.retro-input:focus {
+  outline: none;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 255, 0, 0.3),
+    0 0 10px #00ff00;
+}
+
+.retro-input::placeholder {
+  color: #00ff0060;
+}
+
+.retro-tab {
+  background: #000000;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-family: var(--font-geist-mono), monospace;
+  transition: all 0.3s ease;
+}
+
+.retro-tab:hover {
+  background: #00ff0020;
+}
+
+.retro-tab[data-state="active"] {
+  background: #00ff00;
+  color: #000000;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* CRT Screen Effects */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 3px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline-move 8s linear infinite;
+}
+
+@keyframes scanline-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+.crt-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 0, 0.05) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 9998;
+  animation: glow-flicker 3s ease-in-out infinite;
+}
+
+@keyframes glow-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* RainbowKit Custom Styling */
+.iekbcc0 {
+  font-family: var(--font-geist-mono), monospace !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .retro-text {
+    font-size: 0.875rem;
+  }
+  
+  .glow-text {
+    font-size: 2rem;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+  border: 1px solid #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFFFFF;
+  border: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFFFFF;
+  box-shadow: 0 0 10px #FFFFFF;
+}
+
+/* ============================================
+   ARC NETWORK SILVER GREY THEME
+   Active when data-network="ARC"
+   ============================================ */
+
+[data-network="ARC"] .retro-background {
+  background: radial-gradient(ellipse at center, #2D2D2D 0%, #000000 100%);
+}
+
+[data-network="ARC"] .retro-text {
+  color: #E0E0E0;
+  text-shadow: 0 0 5px #E0E0E0, 0 0 10px #E0E0E080;
+}
+
+[data-network="ARC"] .retro-text-highlight {
+  color: #E0E0E0;
+  text-shadow: 0 0 10px #E0E0E0, 0 0 20px #E0E0E0, 0 0 30px #E0E0E0;
+}
+
+[data-network="ARC"] .glow-text {
+  color: #E0E0E0;
+  text-shadow: 
+    0 0 2.5px #E0E0E0,
+    0 0 5px #E0E0E0,
+    0 0 10px #E0E0E0,
+    0 0 20px #E0E0E0,
+    0 0 40px #E0E0E0;
+  animation: glow-pulse-arc 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-arc {
+  0%, 100% {
+    text-shadow: 
+      0 0 2.5px #E0E0E0,
+      0 0 5px #E0E0E0,
+      0 0 10px #E0E0E0,
+      0 0 20px #E0E0E0,
+      0 0 40px #E0E0E0;
+  }
+  50% {
+    text-shadow: 
+      0 0 1px #E0E0E0,
+      0 0 2.5px #E0E0E0,
+      0 0 5px #E0E0E0,
+      0 0 10px #E0E0E0,
+      0 0 20px #E0E0E0;
+  }
+}
+
+[data-network="ARC"] .retro-panel {
+  background: rgba(45, 45, 45, 0.8);
+  border: 2px solid #FFFFFF;
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.4),
+    inset 0 0 20px rgba(224, 224, 224, 0.1);
+}
+
+[data-network="ARC"] .retro-panel::before {
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(224, 224, 224, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(224, 224, 224, 0.03) 3px
+    );
+}
+
+[data-network="ARC"] .retro-button {
+  background: #2D2D2D;
+  border: 2px solid #707070;
+  color: #E0E0E0;
+  text-shadow: 0 0 5px #E0E0E0;
+  box-shadow: 0 0 10px rgba(112, 112, 112, 0.4);
+}
+
+[data-network="ARC"] .retro-button:hover:not(:disabled) {
+  background: #E0E0E0;
+  color: #000000;
+}
+
+[data-network="ARC"] .retro-input {
+  background: #000000;
+  border: 2px solid #707070;
+  color: #E0E0E0;
+  box-shadow: inset 0 0 10px rgba(224, 224, 224, 0.2);
+}
+
+[data-network="ARC"] .retro-input:focus {
+  box-shadow: 
+    inset 0 0 10px rgba(224, 224, 224, 0.3),
+    0 0 10px #E0E0E0;
+}
+
+[data-network="ARC"] .retro-input::placeholder {
+  color: rgba(224, 224, 224, 0.4);
+}
+
+[data-network="ARC"] .retro-tab {
+  background: #000000;
+  border: 1px solid #707070;
+  color: #E0E0E0;
+}
+
+[data-network="ARC"] .retro-tab:hover {
+  background: rgba(224, 224, 224, 0.1);
+}
+
+[data-network="ARC"] .retro-tab[data-state="active"] {
+  background: #E0E0E0;
+  color: #000000;
+  box-shadow: 0 0 10px #E0E0E0;
+}
+
+[data-network="ARC"] .crt-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(224, 224, 224, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+[data-network="ARC"] ::-webkit-scrollbar-track {
+  border: 1px solid #FFFFFF;
+}
+
+[data-network="ARC"] ::-webkit-scrollbar-thumb {
+  background: #FFFFFF;
+}
+
+[data-network="ARC"] ::-webkit-scrollbar-thumb:hover {
+  background: #FFFFFF;
+  box-shadow: 0 0 10px #FFFFFF;
+}
+
+/* Make contract codes white on ARC network */
+[data-network="ARC"] code,
+[data-network="ARC"] pre,
+[data-network="ARC"] .font-mono {
+  color: #FFFFFF !important;
+}
+
+[data-network="ARC"] .text-green-400 {
+  color: #FFFFFF !important;
+}
+
+/* Contract type buttons - white borders on ARC */
+[data-network="ARC"] .border-green-400,
+[data-network="ARC"] .border-green-500\/40 {
+  border-color: #FFFFFF !important;
+}
+
+/* Deploy button - bright grey background with black text on ARC */
+[data-network="ARC"] button.bg-green-600 {
+  background-color: #E0E0E0 !important;
+  color: #000000 !important;
+}
+
+[data-network="ARC"] .hover\:bg-green-500:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Deployment logs - white border on ARC */
+[data-network="ARC"] .border-\[\#00ff00\] {
+  border-color: #FFFFFF !important;
+}
+
+/* Network switcher - white text on ARC */
+[data-network="ARC"] .border-green-500 {
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* Selected contract buttons - transparent white background on ARC */
+[data-network="ARC"] button.bg-green-900\/40 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Gas limit text - white on ARC */
+[data-network="ARC"] .text-green-400\/70 {
+  color: #FFFFFF !important;
+}
+
+/* Fee token - turquoise color on ARC */
+[data-network="ARC"] .text-yellow-400 {
+  color: #40E0D0 !important;
+}
+
+/* ============================================
+   STABLE NETWORK DARK GREEN THEME
+   Active when data-network="STABLE"
+   ============================================ */
+
+[data-network="STABLE"] .retro-background {
+  background: radial-gradient(ellipse at center, #1a3d1a 0%, #000000 100%);
+}
+
+[data-network="STABLE"] .retro-text {
+  color: #10B981;
+  text-shadow: 0 0 5px #10B981, 0 0 10px #10B98180;
+}
+
+[data-network="STABLE"] .retro-text-highlight {
+  color: #10B981;
+  text-shadow: 0 0 10px #10B981, 0 0 20px #10B981, 0 0 30px #10B981;
+}
+
+[data-network="STABLE"] .glow-text {
+  color: #10B981;
+  text-shadow: 
+    0 0 5px #10B981,
+    0 0 10px #10B981,
+    0 0 20px #10B981,
+    0 0 40px #10B981,
+    0 0 80px #10B981;
+  animation: glow-pulse-stable 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-stable {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px #10B981,
+      0 0 10px #10B981,
+      0 0 20px #10B981,
+      0 0 40px #10B981,
+      0 0 80px #10B981;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px #10B981,
+      0 0 5px #10B981,
+      0 0 10px #10B981,
+      0 0 20px #10B981,
+      0 0 40px #10B981;
+  }
+}
+
+[data-network="STABLE"] .retro-panel {
+  background: rgba(26, 61, 26, 0.8);
+  border: 2px solid #10B981;
+  box-shadow: 
+    0 0 10px rgba(16, 185, 129, 0.4),
+    inset 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+[data-network="STABLE"] .retro-panel::before {
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(16, 185, 129, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(16, 185, 129, 0.03) 3px
+    );
+}
+
+[data-network="STABLE"] .retro-button {
+  background: #1a3d1a;
+  border: 2px solid #10B981;
+  color: #10B981;
+  text-shadow: 0 0 5px #10B981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+[data-network="STABLE"] .retro-button:hover:not(:disabled) {
+  background: #10B981;
+  color: #000000;
+}
+
+[data-network="STABLE"] .retro-input {
+  background: #000000;
+  border: 2px solid #10B981;
+  color: #10B981;
+  box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+[data-network="STABLE"] .retro-input:focus {
+  box-shadow: 
+    inset 0 0 10px rgba(16, 185, 129, 0.3),
+    0 0 10px #10B981;
+}
+
+[data-network="STABLE"] .retro-input::placeholder {
+  color: rgba(16, 185, 129, 0.4);
+}
+
+[data-network="STABLE"] .retro-tab {
+  background: #000000;
+  border: 1px solid #10B981;
+  color: #10B981;
+}
+
+[data-network="STABLE"] .retro-tab:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+[data-network="STABLE"] .retro-tab[data-state="active"] {
+  background: #10B981;
+  color: #000000;
+  box-shadow: 0 0 10px #10B981;
+}
+
+[data-network="STABLE"] .crt-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(16, 185, 129, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+[data-network="STABLE"] ::-webkit-scrollbar-track {
+  border: 1px solid #10B981;
+}
+
+[data-network="STABLE"] ::-webkit-scrollbar-thumb {
+  background: #10B981;
+}
+
+[data-network="STABLE"] ::-webkit-scrollbar-thumb:hover {
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+}
+
+
+
+/* Contract type buttons - dark green borders on STABLE */
+[data-network="STABLE"] .border-green-400,
+[data-network="STABLE"] .border-green-500\/40 {
+  border-color: #10B981 !important;
+}
+
+/* Deploy button - dark green background on STABLE */
+[data-network="STABLE"] button.bg-green-600 {
+  background-color: #10B981 !important;
+  color: #000000 !important;
+}
+
+[data-network="STABLE"] .hover\:bg-green-500:hover {
+  background-color: #059669 !important;
+  color: #000000 !important;
+}
+
+/* Deployment logs - dark green border on STABLE */
+[data-network="STABLE"] .border-\[\#00ff00\] {
+  border-color: #10B981 !important;
+}
+
+/* Network switcher - dark green text on STABLE */
+[data-network="STABLE"] .border-green-500 {
+  border-color: #10B981 !important;
+  color: #10B981 !important;
+}
+
+/* Selected contract buttons - transparent dark green background on STABLE */
+[data-network="STABLE"] button.bg-green-900\/40 {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  border-color: #10B981 !important;
+}
+
+/* Gas limit text - dark green on STABLE */
+[data-network="STABLE"] .text-green-400\/70 {
+  color: #10B981 !important;
+}
+
+/* Fee token - amber color on STABLE */
+[data-network="STABLE"] .text-yellow-400 {
+  color: #F59E0B !important;
+}
+
+/* ============================================
+   BASE MAINNET TURQUOISE/CYAN THEME
+   Active when data-network="BASE"
+   ============================================ */
+
+[data-network="BASE"] .retro-background {
+  background: radial-gradient(ellipse at center, #0a3d3d 0%, #000000 100%);
+}
+
+[data-network="BASE"] .retro-text {
+  color: #00CED1;
+  text-shadow: 0 0 5px #00CED1, 0 0 10px #00CED180;
+}
+
+[data-network="BASE"] .retro-text-highlight {
+  color: #00CED1;
+  text-shadow: 0 0 10px #00CED1, 0 0 20px #00CED1, 0 0 30px #00CED1;
+}
+
+[data-network="BASE"] .glow-text {
+  color: #00CED1;
+  text-shadow: 
+    0 0 5px #00CED1,
+    0 0 10px #00CED1,
+    0 0 20px #00CED1,
+    0 0 40px #00CED1,
+    0 0 80px #00CED1;
+  animation: glow-pulse-base 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-base {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px #00CED1,
+      0 0 10px #00CED1,
+      0 0 20px #00CED1,
+      0 0 40px #00CED1,
+      0 0 80px #00CED1;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px #00CED1,
+      0 0 5px #00CED1,
+      0 0 10px #00CED1,
+      0 0 20px #00CED1,
+      0 0 40px #00CED1;
+  }
+}
+
+[data-network="BASE"] .retro-panel {
+  background: rgba(10, 61, 61, 0.8);
+  border: 2px solid #00CED1;
+  box-shadow: 
+    0 0 10px rgba(0, 206, 209, 0.4),
+    inset 0 0 20px rgba(0, 206, 209, 0.1);
+}
+
+[data-network="BASE"] .retro-panel::before {
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 206, 209, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 206, 209, 0.03) 3px
+    );
+}
+
+[data-network="BASE"] .retro-button {
+  background: #0a3d3d;
+  border: 2px solid #00CED1;
+  color: #00CED1;
+  text-shadow: 0 0 5px #00CED1;
+  box-shadow: 0 0 10px rgba(0, 206, 209, 0.4);
+}
+
+[data-network="BASE"] .retro-button:hover:not(:disabled) {
+  background: #00CED1;
+  color: #000000;
+}
+
+[data-network="BASE"] .retro-input {
+  background: #000000;
+  border: 2px solid #00CED1;
+  color: #00CED1;
+  box-shadow: inset 0 0 10px rgba(0, 206, 209, 0.2);
+}
+
+[data-network="BASE"] .retro-input:focus {
+  box-shadow: 
+    inset 0 0 10px rgba(0, 206, 209, 0.3),
+    0 0 10px #00CED1;
+}
+
+[data-network="BASE"] .retro-input::placeholder {
+  color: rgba(0, 206, 209, 0.4);
+}
+
+[data-network="BASE"] .retro-tab {
+  background: #000000;
+  border: 1px solid #00CED1;
+  color: #00CED1;
+}
+
+[data-network="BASE"] .retro-tab:hover {
+  background: rgba(0, 206, 209, 0.1);
+}
+
+[data-network="BASE"] .retro-tab[data-state="active"] {
+  background: #00CED1;
+  color: #000000;
+  box-shadow: 0 0 10px #00CED1;
+}
+
+[data-network="BASE"] .crt-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 206, 209, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+[data-network="BASE"] ::-webkit-scrollbar-track {
+  border: 1px solid #00CED1;
+}
+
+[data-network="BASE"] ::-webkit-scrollbar-thumb {
+  background: #00CED1;
+}
+
+[data-network="BASE"] ::-webkit-scrollbar-thumb:hover {
+  background: #00CED1;
+  box-shadow: 0 0 10px #00CED1;
+}
+
+/* Make contract codes turquoise on BASE network */
+[data-network="BASE"] code,
+[data-network="BASE"] pre,
+[data-network="BASE"] .font-mono {
+  color: #00CED1 !important;
+}
+
+[data-network="BASE"] .text-green-400 {
+  color: #00CED1 !important;
+}
+
+/* Contract type buttons - turquoise borders on BASE */
+[data-network="BASE"] .border-green-400,
+[data-network="BASE"] .border-green-500\/40 {
+  border-color: #00CED1 !important;
+}
+
+/* Deploy button - turquoise background on BASE */
+[data-network="BASE"] button.bg-green-600 {
+  background-color: #00CED1 !important;
+  color: #000000 !important;
+}
+
+[data-network="BASE"] .hover\:bg-green-500:hover {
+  background-color: #40E0D0 !important;
+  color: #000000 !important;
+}
+
+/* Deployment logs - turquoise border on BASE */
+[data-network="BASE"] .border-\[\#00ff00\] {
+  border-color: #00CED1 !important;
+}
+
+/* Network switcher - turquoise text on BASE */
+[data-network="BASE"] .border-green-500 {
+  border-color: #00CED1 !important;
+  color: #00CED1 !important;
+}
+
+/* Selected contract buttons - transparent turquoise background on BASE */
+[data-network="BASE"] button.bg-green-900\/40 {
+  background-color: rgba(0, 206, 209, 0.1) !important;
+  border-color: #00CED1 !important;
+}
+
+/* Gas limit text - turquoise on BASE */
+[data-network="BASE"] .text-green-400\/70 {
+  color: #00CED1 !important;
+}
+
+/* Fee token - orange color on BASE */
+[data-network="BASE"] .text-yellow-400 {
+  color: #FF8C00 !important;
+}
+
+/* ============================================
+   RAINBOWKIT WALLET CONNECTION DROPDOWN CUSTOM STYLES
+   Make all text in wallet dropdown white
+   ============================================ */
+
+/* Make all text in RainbowKit modals white */
+[data-rk] * {
+  color: #FFFFFF !important;
+}
+
+/* Chain names and wallet names */
+[data-rk] button,
+[data-rk] div,
+[data-rk] span,
+[data-rk] p {
+  color: #FFFFFF !important;
+}
+
+/* Wallet list items */
+[data-rk] [role="menuitem"],
+[data-rk] [role="button"] {
+  color: #FFFFFF !important;
+}
+
+/* Network names in dropdown */
+div[role="menu"] button,
+div[role="menu"] span {
+  color: #FFFFFF !important;
+}
