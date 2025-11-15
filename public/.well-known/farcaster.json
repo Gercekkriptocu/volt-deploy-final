@@ -1,0 +1,26 @@
+{
+  "miniapp": {
+    "version": "1",
+    "name": "Retro Contract Launcher",
+    "iconUrl": "https://usdozf7pplhxfvrl.public.blob.vercel-storage.com/thumbnail_58044ec6-bf7e-45fc-bb46-64b50969e653-4cGHiPnbGMR5trfyUkMoJrHFqupAn2",
+    "homeUrl": "https://father-post-311.app.ohara.ai",
+    "imageUrl": "https://usdozf7pplhxfvrl.public.blob.vercel-storage.com/thumbnail_58044ec6-bf7e-45fc-bb46-64b50969e653-4cGHiPnbGMR5trfyUkMoJrHFqupAn2",
+    "buttonTitle": "Open with Ohara",
+    "splashImageUrl": "https://usdozf7pplhxfvrl.public.blob.vercel-storage.com/farcaster/splash_images/splash_image1.svg",
+    "splashBackgroundColor": "#ffffff",
+    "tags": [
+      "ohara",
+      "mini-app",
+      "base",
+      "farcaster"
+    ],
+    "primaryCategory": "entertainment",
+    "ogTitle": "Retro Contract Launcher",
+    "ogImageUrl": "https://usdozf7pplhxfvrl.public.blob.vercel-storage.com/thumbnail_58044ec6-bf7e-45fc-bb46-64b50969e653-4cGHiPnbGMR5trfyUkMoJrHFqupAn2"
+  },
+  "baseBuilder": {
+    "allowedAddresses": [
+      ""
+    ]
+  }
+}
