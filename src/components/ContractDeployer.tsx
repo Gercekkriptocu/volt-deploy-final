@@ -1435,6 +1435,7 @@ const ContractDeployerComponent = function ContractDeployer({ onLog }: ContractD
               `🚀 Just deployed a ${CONTRACTS[selectedContract].name} contract on ${currentNetwork.displayName}!\n\n` +
               `📍 Contract: ${contractAddress}\n` +
               `🔗 Explorer: ${currentNetwork.explorerUrl}/address/${contractAddress}\n\n` +
+              ` https://www.voltplayground.xyz
               `@voltnewsdotxyz #${currentNetwork.displayName.replace(/\s+/g, '')}`
             )}`}
             target="_blank"
