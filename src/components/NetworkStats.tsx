@@ -249,6 +249,85 @@ export function NetworkStats(): JSX.Element {
     }
   };
 
+  const fetchTempoStats = async (): Promise<void> => {
+    try {
+      console.log('📊 Fetching TEMPO Network stats...');
+      
+      if (!window.ethereum) {
+        throw new Error('Wallet not connected');
+      }
+
+      // 1. Fetch Latest Block Number via RPC
+      const blockNumberHex = await window.ethereum.request({
+        method: 'eth_blockNumber',
+        params: [],
+      }) as string;
+      
+      const blockNumber = parseInt(blockNumberHex, 16);
+      console.log('✅ Latest Block:', blockNumber);
+
+      // 2. Fetch Latest Block Details (for timestamp)
+      const latestBlock = await window.ethereum.request({
+        method: 'eth_getBlockByNumber',
+        params: ['latest', false],
+      }) as any;
+
+      // 3. Fetch Previous Block (for avg block time calculation)
+      const prevBlockHex = '0x' + (blockNumber - 1).toString(16);
+      const prevBlock = await window.ethereum.request({
+        method: 'eth_getBlockByNumber',
+        params: [prevBlockHex, false],
+      }) as any;
+
+      console.log('✅ Latest Block Data:', latestBlock);
+      console.log('✅ Previous Block Data:', prevBlock);
+
+      // Calculate average block time
+      let avgBlockTime = 'N/A';
+      if (latestBlock?.timestamp && prevBlock?.timestamp) {
+        const latestTimestamp = parseInt(latestBlock.timestamp, 16);
+        const prevTimestamp = parseInt(prevBlock.timestamp, 16);
+        const blockTimeSec = latestTimestamp - prevTimestamp;
+        avgBlockTime = blockTimeSec.toFixed(2);
+        console.log('✅ Avg Block Time:', avgBlockTime + 's');
+      }
+
+      // 4. Fetch Gas Price
+      let gasPrice = 'N/A';
+      try {
+        const gasPriceHex = await window.ethereum.request({
+          method: 'eth_gasPrice',
+          params: [],
+        }) as string;
+        
+        const gasPriceWei = parseInt(gasPriceHex, 16);
+        const gasPriceGwei = gasPriceWei / 1e9;
+        gasPrice = `${parseFloat(gasPriceGwei.toFixed(4))} Gwei`;
+        console.log('✅ Gas Price:', gasPrice);
+      } catch (error) {
+        console.warn('⚠️ Could not fetch gas price');
+        gasPrice = 'N/A';
+      }
+
+      setStats({
+        blockHeight: blockNumber.toString(),
+        totalTransactions: avgBlockTime, // Store avg block time
+        activeAccounts: gasPrice, // Store gas price
+        lastUpdate: new Date().toISOString(),
+        avgBlockTime: avgBlockTime,
+      });
+
+    } catch (error) {
+      console.error('❌ Failed to fetch TEMPO stats:', error);
+      setStats({
+        blockHeight: 'N/A',
+        totalTransactions: 'N/A',
+        activeAccounts: 'N/A',
+        lastUpdate: new Date().toISOString(),
+      });
+    }
+  };
+
   const fetchGiwaStats = async (): Promise<void> => {
     try {
       console.log('📊 Fetching GIWA Network stats...');
@@ -356,6 +435,12 @@ export function NetworkStats(): JSX.Element {
         return;
       }
       
+      // TEMPO NETWORK: Use RPC for block + avg block time + gas price
+      if (currentNetwork.chainId === 42429) {
+        await fetchTempoStats();
+        return;
+      }
+      
       // OTHER NETWORKS: Use explorer API via proxy
       const explorerUrl = new URL(currentNetwork.explorerApiUrl);
       
@@ -385,7 +470,7 @@ export function NetworkStats(): JSX.Element {
       }
     } catch (error) {
       console.error('❌ Failed to fetch network stats:', error);
-      if (currentNetwork.chainId !== 2201 && currentNetwork.chainId !== 8453 && currentNetwork.chainId !== 5042002 && currentNetwork.chainId !== 91342) {
+      if (currentNetwork.chainId !== 2201 && currentNetwork.chainId !== 8453 && currentNetwork.chainId !== 5042002 && currentNetwork.chainId !== 91342 && currentNetwork.chainId !== 42429) {
         setStats({
           blockHeight: 'N/A',
           totalTransactions: 'N/A',
@@ -458,12 +543,12 @@ export function NetworkStats(): JSX.Element {
         </div>
         
         <div className="flex justify-between items-center">
-          <span className="retro-text">&gt; {currentNetwork.chainId === 8453 ? 'TOTAL ADDRESSES:' : currentNetwork.chainId === 91342 ? 'AVG BLOCK TIME:' : 'TOTAL TX:'}</span>
-          <span className="retro-text-highlight">{currentNetwork.chainId === 91342 && stats.avgBlockTime ? `${stats.avgBlockTime}s` : stats.totalTransactions}</span>
+          <span className="retro-text">&gt; {currentNetwork.chainId === 8453 ? 'TOTAL ADDRESSES:' : currentNetwork.chainId === 91342 || currentNetwork.chainId === 42429 ? 'AVG BLOCK TIME:' : 'TOTAL TX:'}</span>
+          <span className="retro-text-highlight">{(currentNetwork.chainId === 91342 || currentNetwork.chainId === 42429) && stats.avgBlockTime ? `${stats.avgBlockTime}s` : stats.totalTransactions}</span>
         </div>
         
         <div className="flex justify-between items-center">
-          <span className="retro-text">&gt; {currentNetwork.chainId === 8453 ? 'GAS USED:' : currentNetwork.chainId === 5042002 ? 'GAS TRACKER:' : currentNetwork.chainId === 91342 ? 'TX 24H:' : 'AVG TPS:'}</span>
+          <span className="retro-text">&gt; {currentNetwork.chainId === 8453 ? 'GAS USED:' : currentNetwork.chainId === 5042002 || currentNetwork.chainId === 42429 ? 'GAS TRACKER:' : currentNetwork.chainId === 91342 ? 'TX 24H:' : 'AVG TPS:'}</span>
           <span className="retro-text-highlight">{stats.activeAccounts}</span>
         </div>
         
