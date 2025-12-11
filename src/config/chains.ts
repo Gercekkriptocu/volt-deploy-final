@@ -132,44 +132,6 @@ export const CHAINS: ChainConfig[] = [
   },
   
   // ─────────────────────────────────────────────────────────────
-  // 🟢 STABLE TESTNET - Tether USD Native
-  // ─────────────────────────────────────────────────────────────
-  {
-    id: 'STABLE',
-    name: 'Stable Testnet',
-    displayName: 'STABLE',
-    chainId: 2201,
-    
-    rpcUrls: {
-      primary: 'https://rpc.stable.xyz',
-      fallbacks: [], // No official fallbacks; add community/public if available (e.g., via providers like dRPC)
-      websocket: 'wss://rpc.stable.xyz',
-    },
-    
-    explorerUrl: 'https://testnet.stablescan.xyz',
-    explorerApiUrl: 'https://testnet.stablescan.xyz/api', // Stablescan uses Etherscan-compatible API (/api?module=stats&action=...)
-    explorerName: 'Stable Scan',
-    
-    nativeCurrency: {
-      name: 'Tether USD',
-      symbol: 'gUSDT',
-      decimals: 18
-    },
-    
-    feeToken: {
-      name: 'Tether USD',
-      symbol: 'gUSDT',
-      decimals: 18,
-      isNative: true // gUSDT is native gas token on Stable
-    },
-    
-    color: 'darkgreen',
-    ascii: '█▓▒░ STABLE ░▒▓█',
-    testnet: true,
-    faucet: 'https://faucet.stable.xyz'
-  },
-  
-  // ─────────────────────────────────────────────────────────────
   // 🔵 BASE MAINNET - Ethereum L2
   // ─────────────────────────────────────────────────────────────
   {
@@ -201,6 +163,44 @@ export const CHAINS: ChainConfig[] = [
     color: 'cyan',
     ascii: '█▓▒░ BASE MAINNET ░▒▓█',
     testnet: false
+  },
+  
+  // ─────────────────────────────────────────────────────────────
+  // 🟣 TEMPO TESTNET - USD Native Chain
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: 'TEMPO',
+    name: 'Tempo Testnet',
+    displayName: 'TEMPO TESTNET',
+    chainId: 42429,
+    
+    rpcUrls: {
+      primary: 'https://rpc.testnet.tempo.xyz',
+      fallbacks: [],
+      websocket: 'wss://rpc.testnet.tempo.xyz'
+    },
+    
+    explorerUrl: 'https://explore.tempo.xyz',
+    explorerApiUrl: 'https://explore.tempo.xyz/api',
+    explorerName: 'Tempo Explorer',
+    
+    nativeCurrency: {
+      name: 'USD',
+      symbol: 'USD',
+      decimals: 18
+    },
+    
+    feeToken: {
+      name: 'USD',
+      symbol: 'USD',
+      decimals: 18,
+      isNative: true // USD is native gas token on Tempo
+    },
+    
+    color: 'gray',
+    ascii: '█▓▒░ TEMPO TESTNET ░▒▓█',
+    testnet: true,
+    faucet: 'https://docs.tempo.xyz/quickstart/get-testnet-usd'
   },
   
   // ═══════════════════════════════════════════════════════════════
