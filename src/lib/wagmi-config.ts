@@ -48,6 +48,7 @@ export const giwaSepoliaTestnet = viemChains.find(c => c.id === 91342)!
 export const arcTestnet = viemChains.find(c => c.id === 5042002)!
 export const stableTestnet = viemChains.find(c => c.id === 2201)!
 export const baseMainnet = viemChains.find(c => c.id === 8453)!
+export const tempoTestnet = viemChains.find(c => c.id === 42429)!
 
 // Auto-generate transports from CHAINS config
 const transports = CHAINS.reduce((acc, chain) => {
