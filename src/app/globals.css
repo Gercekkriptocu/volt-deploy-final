@@ -848,6 +848,197 @@
 }
 
 /* ============================================
+   TEMPO TESTNET SILVER GREY THEME
+   Active when data-network="TEMPO"
+   Same styling as ARC Network
+   ============================================ */
+
+[data-network="TEMPO"] .retro-background {
+  background: radial-gradient(ellipse at center, #2D2D2D 0%, #000000 100%);
+}
+
+[data-network="TEMPO"] .retro-text {
+  color: #E0E0E0;
+  text-shadow: 0 0 5px #E0E0E0, 0 0 10px #E0E0E080;
+}
+
+[data-network="TEMPO"] .retro-text-highlight {
+  color: #E0E0E0;
+  text-shadow: 0 0 10px #E0E0E0, 0 0 20px #E0E0E0, 0 0 30px #E0E0E0;
+}
+
+[data-network="TEMPO"] .glow-text {
+  color: #E0E0E0;
+  text-shadow: 
+    0 0 2.5px #E0E0E0,
+    0 0 5px #E0E0E0,
+    0 0 10px #E0E0E0,
+    0 0 20px #E0E0E0,
+    0 0 40px #E0E0E0;
+  animation: glow-pulse-tempo 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-tempo {
+  0%, 100% {
+    text-shadow: 
+      0 0 2.5px #E0E0E0,
+      0 0 5px #E0E0E0,
+      0 0 10px #E0E0E0,
+      0 0 20px #E0E0E0,
+      0 0 40px #E0E0E0;
+  }
+  50% {
+    text-shadow: 
+      0 0 1px #E0E0E0,
+      0 0 2.5px #E0E0E0,
+      0 0 5px #E0E0E0,
+      0 0 10px #E0E0E0,
+      0 0 20px #E0E0E0;
+  }
+}
+
+[data-network="TEMPO"] .retro-panel {
+  background: rgba(45, 45, 45, 0.8);
+  border: 2px solid #FFFFFF;
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.4),
+    inset 0 0 20px rgba(224, 224, 224, 0.1);
+}
+
+[data-network="TEMPO"] .retro-panel::before {
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(224, 224, 224, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(224, 224, 224, 0.03) 3px
+    );
+}
+
+[data-network="TEMPO"] .retro-button {
+  background: #2D2D2D;
+  border: 2px solid #707070;
+  color: #E0E0E0;
+  text-shadow: 0 0 5px #E0E0E0;
+  box-shadow: 0 0 10px rgba(112, 112, 112, 0.4);
+}
+
+[data-network="TEMPO"] .retro-button:hover:not(:disabled) {
+  background: #E0E0E0;
+  color: #000000;
+}
+
+[data-network="TEMPO"] .retro-input {
+  background: #000000;
+  border: 2px solid #707070;
+  color: #E0E0E0;
+  box-shadow: inset 0 0 10px rgba(224, 224, 224, 0.2);
+}
+
+[data-network="TEMPO"] .retro-input:focus {
+  box-shadow: 
+    inset 0 0 10px rgba(224, 224, 224, 0.3),
+    0 0 10px #E0E0E0;
+}
+
+[data-network="TEMPO"] .retro-input::placeholder {
+  color: rgba(224, 224, 224, 0.4);
+}
+
+[data-network="TEMPO"] .retro-tab {
+  background: #000000;
+  border: 1px solid #707070;
+  color: #E0E0E0;
+}
+
+[data-network="TEMPO"] .retro-tab:hover {
+  background: rgba(224, 224, 224, 0.1);
+}
+
+[data-network="TEMPO"] .retro-tab[data-state="active"] {
+  background: #E0E0E0;
+  color: #000000;
+  box-shadow: 0 0 10px #E0E0E0;
+}
+
+[data-network="TEMPO"] .crt-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(224, 224, 224, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+[data-network="TEMPO"] ::-webkit-scrollbar-track {
+  border: 1px solid #FFFFFF;
+}
+
+[data-network="TEMPO"] ::-webkit-scrollbar-thumb {
+  background: #FFFFFF;
+}
+
+[data-network="TEMPO"] ::-webkit-scrollbar-thumb:hover {
+  background: #FFFFFF;
+  box-shadow: 0 0 10px #FFFFFF;
+}
+
+/* Make contract codes white on TEMPO network */
+[data-network="TEMPO"] code,
+[data-network="TEMPO"] pre,
+[data-network="TEMPO"] .font-mono {
+  color: #FFFFFF !important;
+}
+
+[data-network="TEMPO"] .text-green-400 {
+  color: #FFFFFF !important;
+}
+
+/* Contract type buttons - white borders on TEMPO */
+[data-network="TEMPO"] .border-green-400,
+[data-network="TEMPO"] .border-green-500\/40 {
+  border-color: #FFFFFF !important;
+}
+
+/* Deploy button - bright grey background with black text on TEMPO */
+[data-network="TEMPO"] button.bg-green-600 {
+  background-color: #E0E0E0 !important;
+  color: #000000 !important;
+}
+
+[data-network="TEMPO"] .hover\:bg-green-500:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Deployment logs - white border on TEMPO */
+[data-network="TEMPO"] .border-\[\#00ff00\] {
+  border-color: #FFFFFF !important;
+}
+
+/* Network switcher - white text on TEMPO */
+[data-network="TEMPO"] .border-green-500 {
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* Selected contract buttons - transparent white background on TEMPO */
+[data-network="TEMPO"] button.bg-green-900\/40 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Gas limit text - white on TEMPO */
+[data-network="TEMPO"] .text-green-400\/70 {
+  color: #FFFFFF !important;
+}
+
+/* Fee token - turquoise color on TEMPO */
+[data-network="TEMPO"] .text-yellow-400 {
+  color: #40E0D0 !important;
+}
+
+/* ============================================
    RAINBOWKIT WALLET CONNECTION DROPDOWN CUSTOM STYLES
    Make all text in wallet dropdown white
    ============================================ */
